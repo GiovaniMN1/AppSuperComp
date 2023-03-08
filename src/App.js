@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled from"styled-components";
+import Header from "./componentes/Header";
+import BoxStar from "./componentes/BoxStar";
+import BoxDescription from "./componentes/BoxDescription";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App=()=>{
+  return(
+    <BoxMain>
+      <BoxStar/>
+      <BoxDescription/>
+
+
+      
+    </BoxMain>
+  )
 }
 
-export default App;
+const BoxMain=styled.div`
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    width: 100%;
+    
+`
+
+export default App
