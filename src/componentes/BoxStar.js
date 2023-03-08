@@ -12,41 +12,42 @@ const BoxStar=()=>{
 
         const options = {
             method: 'GET',
-            url: 'https://superhero-search.p.rapidapi.com/api/heroes',
+            url: 'https://superhero-search.p.rapidapi.com/api/?hero=Spiderman',
             headers: {
              'X-RapidAPI-Key': '80733d58admsh2d071201d7305aap13f084jsn51d9e7e388cf',
               'X-RapidAPI-Host': 'superhero-search.p.rapidapi.com'
             }
-          };
-    fetch("https://superhero-search.p.rapidapi.com/api/heroes", options)
-      .then((response) => response.json())
-      .then((res) => {
-        cambiarres(res);
-        setImgUrl(res.length > 1 && res[0].images ? res[0].images.lg : "ruta/imagen/por/defecto.jpg");
-    })
-      .catch((err) => console.error(err));
+        };
+        
+        fetch('https://superhero-search.p.rapidapi.com/api/?hero=Spiderman', options)
+            .then(response => response.json())
+            .then((res) => {
+                cambiarres(res);
+                
+            })
+            .catch(err => console.error(err));
   }, []);
     return(
         <BoxStarCon imgUrl={imgUrl}>
             <BoxCard>
-                <img src={res.length > 1 && res[0].images ? res[0].images.lg : "ruta/imagen/por/defecto.jpg"} alt="Descripción de la imagen"/>
+                <img src={res.images.lg } alt={res.name}/>
             </BoxCard>
             <BoxStarConDescription>
                 <BoxStarConDescriptionTitle>
-                    <p>{res.length > 0 ? res[0].name : "Load"}</p>
+                    <p>{res.name}</p>
                 </BoxStarConDescriptionTitle>
                 <BoxStarConDescriptionFeatured>
                     <BoxStarConDescriptionFeaturedItems >
                         <p><FontAwesomeIcon icon={faUsers}/></p> 
-                        <p>{res.length > 0 ? res[0].biography.alignment: "Load"}</p>
+                        <p>{res.biography.alignment}</p>
                         </BoxStarConDescriptionFeaturedItems>
                     <BoxStarConDescriptionFeaturedItems>
                         <p><FontAwesomeIcon icon={faBolt}/></p> 
-                        <p>29</p>
+                        <p>{res.powerstats.combat}</p>
                     </BoxStarConDescriptionFeaturedItems>
                     <BoxStarConDescriptionFeaturedItems>
                         <p><FontAwesomeIcon icon={faPersonRunning}/></p> 
-                        <p>29</p>
+                        <p>{res.powerstats.speed}</p>
                     </BoxStarConDescriptionFeaturedItems>
                     
                 </BoxStarConDescriptionFeatured>
@@ -58,11 +59,9 @@ const BoxStar=()=>{
 const BoxStarCon=styled.div`
     display: flex;
     height: 90vh;
-    background: linear-gradient(to bottom, rgba(255,255,255,.5) 0%, rgba(0,0,0,.5) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
-    background-blend-mode: multiply,multiply;
-    background-image: url(${props => props.imgUrl});
-    background-repeat:no-repeat;
-    background-size: cover;
+    background-color: #E4E4E1;
+ background-image: radial-gradient(at top center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.03) 100%), linear-gradient(to top, rgba(255,255,255,0.1) 0%, rgba(143,152,157,0.60) 100%);
+ 	background-blend-mode: normal, multiply;
     background-attachment: fixed;
     background-position: center;
     align-items: center;
@@ -76,11 +75,13 @@ const BoxCard=styled.div`
     display: flex;
     width:100%;
     height: 70%;
+    
     justify-content: center;
     padding-top: 20px;
     border-radius: 5px;
     && img{
         border-radius: 5px;
+       
     }
 
 `
@@ -88,7 +89,7 @@ const BoxStarConDescription=styled.div`
     display: flex;
     width:60%;
     height: 90px;
-    background-color: rgba(57, 62, 70, .85);
+    background-color: #393E46;
     margin-bottom: 50px;
     border-radius: 10px;
 `

@@ -6,12 +6,34 @@ import {faAddressCard, faPuzzlePiece, faRadiation, faHammer } from '@fortawesome
 
 
 const BoxDescription=()=>{
+    const [res, cambiarres] = useState([]);
+    
+
+    useEffect(() => {
+
+        const options = {
+            method: 'GET',
+            url: 'https://superhero-search.p.rapidapi.com/api/?hero=Spiderman',
+            headers: {
+             'X-RapidAPI-Key': '80733d58admsh2d071201d7305aap13f084jsn51d9e7e388cf',
+              'X-RapidAPI-Host': 'superhero-search.p.rapidapi.com'
+            }
+        };
+        
+        fetch('https://superhero-search.p.rapidapi.com/api/?hero=Spiderman', options)
+            .then(response => response.json())
+            .then((res) => {
+                cambiarres(res);
+                
+            })
+            .catch(err => console.error(err));
+  }, []);
 
     return(
         <BrowserRouter>
             <BoxMenuInfo>
                 <BoxMenuInfotitle>
-                    <p>Informacion destacada</p>
+                    <p>Additional Information</p>
                 </BoxMenuInfotitle>
                 
                 <BoxMenuInfoItems>
@@ -19,25 +41,25 @@ const BoxDescription=()=>{
                         <NavLink to='/'>
                             <BoxMenuInfoIcon green ><FontAwesomeIcon icon={faAddressCard}/></BoxMenuInfoIcon>
                         </NavLink>
-                            <BoxMenuInfoIconP><p>Informacion</p></BoxMenuInfoIconP>
+                            <BoxMenuInfoIconP><p>Information</p></BoxMenuInfoIconP>
                     </BoxMenuInfoIcons>
                     <BoxMenuInfoIcons>
                         <NavLink to='/appearance'>
                             <BoxMenuInfoIcon yellow><FontAwesomeIcon icon={faPuzzlePiece}/></BoxMenuInfoIcon>
                         </NavLink>
-                            <BoxMenuInfoIconP><p>Apariencia</p></BoxMenuInfoIconP>
+                            <BoxMenuInfoIconP><p>Appearance</p></BoxMenuInfoIconP>
                     </BoxMenuInfoIcons>
                     <BoxMenuInfoIcons>
                         <NavLink to='/powers'>
                             <BoxMenuInfoIcon purple><FontAwesomeIcon icon={faRadiation}/></BoxMenuInfoIcon>
                         </NavLink>
-                            <BoxMenuInfoIconP><p>Poderes</p></BoxMenuInfoIconP>
+                            <BoxMenuInfoIconP><p>Powers</p></BoxMenuInfoIconP>
                     </BoxMenuInfoIcons>
                     <BoxMenuInfoIcons>
                         <NavLink to='/work'>
                             <BoxMenuInfoIcon pink><FontAwesomeIcon icon={faHammer}/></BoxMenuInfoIcon>
                         </NavLink>
-                            <BoxMenuInfoIconP><p>Trabajo</p></BoxMenuInfoIconP>
+                            <BoxMenuInfoIconP><p>Work</p></BoxMenuInfoIconP>
                     </BoxMenuInfoIcons>
                 </BoxMenuInfoItems>
                 
@@ -45,39 +67,39 @@ const BoxDescription=()=>{
                     <Routes>
                         <Route path="/" element={
                             <BoxMenuInfoContainerRoutesDiv green>
-                                <h2>Pagina de Informacion</h2>
-                                <p>Alineaion:</p>
-                                <p>Alter egos:</p>
-                                <p>Primera aparicion:</p>
-                                <p>Nombre completo:</p>
-                                <p>Publicado:</p>
+                                <h2>Information</h2>
+                                <p>Alineation: {res.biography.alignment} </p>
+                                <p>Alter egos: {res.biography.alterEgos}</p>
+                                <p>Primera aparicion:  {res.biography.firstAppearance}</p>
+                                <p>Nombre completo:  {res.biography.fullName}</p>
+                                <p>Publicado:  {res.biography.publisher}</p>
                             </BoxMenuInfoContainerRoutesDiv>
                         }/>
 
                         <Route path="/appearance" element={
                             <BoxMenuInfoContainerRoutesDiv yellow>
-                                <h2>Pagina de Aprencia</h2>
-                                <p>Color de ojos:</p>
-                                <p>Genero:</p>
-                                <p>Color de cabello</p>
+                                <h2>Appearance</h2>
+                                <p>Eye color:  {res.appearance.eyeColor}</p>
+                                <p>Gender:  {res.appearance.gender}</p>
+                                <p>Hair color:  {res.appearance.hairColor}</p>
                             </BoxMenuInfoContainerRoutesDiv>
                         }/>
                         
                         <Route path="/powers" element={
                             <BoxMenuInfoContainerRoutesDiv purple>
-                                <h2>Pagina de Poderes</h2>
-                                <p>Combate:</p>
-                                <p>durabilidad:</p>
-                                <p>Inteligencia</p>
-                                <p>Velocidad:</p>
+                                <h2>Powers</h2>
+                                <p>Combat:  {res.powerstats.combat}</p>
+                                <p>Durability:  {res.powerstats.durability}</p>
+                                <p>Intelligence:  {res.powerstats.intelligence}</p>
+                                <p>Speed:  {res.powerstats.speed}</p>
                             </BoxMenuInfoContainerRoutesDiv>
                         }/>
 
                         <Route path="/work" element={
                             <BoxMenuInfoContainerRoutesDiv pink>
-                                <h2>Pagina de Trabajo</h2>
-                                <p>Base:</p>
-                                <p>Ocupacion:</p>
+                                <h2>Work</h2>
+                                <p>Base:  {res.work.base}</p>
+                                <p>Ocupacion:  {res.work.occupation}</p>
                             </BoxMenuInfoContainerRoutesDiv>
                         }/>
                     </Routes>
@@ -100,6 +122,7 @@ const BoxMenuInfo=styled.div`
     align-items: center;
     width: 100%;
     height: 80vh;
+    
 `
 const BoxMenuInfotitle=styled.div`
     display: flex;
@@ -175,7 +198,7 @@ const BoxMenuInfoContainerRoutes=styled.div`
 const BoxMenuInfoContainerRoutesDiv=styled.div`
 display: flex;
    width: 100%;
-    color: #0F3460;
+    color: #434242;
     height: 100%;
     flex-direction: column;
     justify-content: center;
