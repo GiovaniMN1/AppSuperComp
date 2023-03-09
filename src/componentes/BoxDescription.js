@@ -15,8 +15,8 @@ const BoxDescription=()=>{
             method: 'GET',
             url: 'https://superhero-search.p.rapidapi.com/api/?hero=Spiderman',
             headers: {
-             'X-RapidAPI-Key': '80733d58admsh2d071201d7305aap13f084jsn51d9e7e388cf',
-              'X-RapidAPI-Host': 'superhero-search.p.rapidapi.com'
+                'X-RapidAPI-Key': '0ee361c95amsh236653a7a8191f2p13fd33jsn304d9428f829',
+                'X-RapidAPI-Host': 'superhero-search.p.rapidapi.com'
             }
         };
         
@@ -68,38 +68,38 @@ const BoxDescription=()=>{
                         <Route path="/" element={
                             <BoxMenuInfoContainerRoutesDiv green>
                                 <h2>Information</h2>
-                                <p>Alineation: {res.biography.alignment} </p>
-                                <p>Alter egos: {res.biography.alterEgos}</p>
-                                <p>Primera aparicion:  {res.biography.firstAppearance}</p>
-                                <p>Nombre completo:  {res.biography.fullName}</p>
-                                <p>Publicado:  {res.biography.publisher}</p>
+                                <p>Alignment:  {res.biography?.alignment}</p>
+                                <p>Alter egos: {res.biography?.alterEgos}</p>
+                                <p>First appearance:  {res.biography?.firstAppearance}</p>
+                                <p>Full name:  {res.biography?.fullName}</p>
+                                <p>Publisher:  {res.biography?.publisher}</p>
                             </BoxMenuInfoContainerRoutesDiv>
                         }/>
 
                         <Route path="/appearance" element={
                             <BoxMenuInfoContainerRoutesDiv yellow>
                                 <h2>Appearance</h2>
-                                <p>Eye color:  {res.appearance.eyeColor}</p>
-                                <p>Gender:  {res.appearance.gender}</p>
-                                <p>Hair color:  {res.appearance.hairColor}</p>
+                                <p>Eye color:  {res.appearance?.eyeColor}</p>
+                                <p>Gender:  {res.appearance?.gender}</p>
+                                <p>Hair color:  {res.appearance?.hairColor}</p>
                             </BoxMenuInfoContainerRoutesDiv>
                         }/>
                         
                         <Route path="/powers" element={
                             <BoxMenuInfoContainerRoutesDiv purple>
                                 <h2>Powers</h2>
-                                <p>Combat:  {res.powerstats.combat}</p>
-                                <p>Durability:  {res.powerstats.durability}</p>
-                                <p>Intelligence:  {res.powerstats.intelligence}</p>
-                                <p>Speed:  {res.powerstats.speed}</p>
+                                <p>Combat:  {res.powerstats?.combat}</p>
+                                <p>Durability:  {res.powerstats?.durability}</p>
+                                <p>Intelligence:  {res.powerstats?.intelligence}</p>
+                                <p>Speed:  {res.powerstats?.speed}</p>
                             </BoxMenuInfoContainerRoutesDiv>
                         }/>
 
                         <Route path="/work" element={
                             <BoxMenuInfoContainerRoutesDiv pink>
                                 <h2>Work</h2>
-                                <p>Base:  {res.work.base}</p>
-                                <p>Ocupacion:  {res.work.occupation}</p>
+                                <p>Base:  {res.work?.base}</p>
+                                <p>Ocupacion:  {res.work?.occupation}</p>
                             </BoxMenuInfoContainerRoutesDiv>
                         }/>
                     </Routes>
@@ -122,7 +122,15 @@ const BoxMenuInfo=styled.div`
     align-items: center;
     width: 100%;
     height: 80vh;
-    
+    @media (max-width: 991.98px) {
+        height: 55vh;
+    }
+    @media (max-width: 575.98px) {
+        height: 60vh;
+    }
+    @media (max-width: 321.98px) {
+        height: 110vh;
+    }
 `
 const BoxMenuInfotitle=styled.div`
     display: flex;
@@ -134,18 +142,27 @@ const BoxMenuInfotitle=styled.div`
     
     padding-top: 10px;
     padding-bottom: 10px;
-    
+    @media (max-width: 991.98px) {
+        width: 80%;
+        font-size: 1.8rem;
+    }
+    @media (max-width: 575.98px) {
+        font-size: 1.6rem;
+    }
 `
 const BoxMenuInfoItems=styled.div`
     display: flex;
     width: 45%;
     color: #0F3460;
-    
     height: auto;
     justify-content: space-around;
     align-items: center;
-    
-    
+    @media (max-width: 991.98px) {
+        width: 65%;
+    }
+    @media (max-width: 575.98px) {
+        width: 90%;
+    }
 `
 const BoxMenuInfoIcons=styled.nav`
     width: 80px;
@@ -162,7 +179,6 @@ const BoxMenuInfoIcons=styled.nav`
     }
         && :hover p{
         background-color:#ffffff;
-        
         color: #444444;
     }
 `
@@ -175,38 +191,55 @@ const BoxMenuInfoIcon=styled.div`
     align-items: center;
     background-color: ${props => props.green ? "#96CEB4" : props.yellow ? "#FFE162" : props.purple ? "#C3ACD0" :  props.pink ? "#F7C8E0" :"transparent"};
     color: #444444;
-    
-      
 `
 const BoxMenuInfoIconP=styled.div`
     width: 80px;
     height: 10px;
     text-align: center;
     margin-top: 5px;
+    @media (max-width: 991.98px) {
+        
+        font-size: 1.1rem;
+    }
 `
 const BoxMenuInfoContainerRoutes=styled.div`
     display: flex;
     width: 45%;
     color: #0F3460;
     height: 50%;
-    
     background-color:gray;
     border-radius: 5px;
+    @media (max-width: 991.98px) {
+        width: 65%;
+    }
+    @media (max-width: 575.98px) {
+        height: 55%;   
+        width: 80%;
+    }
+    
     
     
 `
 const BoxMenuInfoContainerRoutesDiv=styled.div`
-display: flex;
-   width: 100%;
+    display: flex;
+    width: 100%;
     color: #434242;
     height: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding-left: 50px;
+    padding-left: 70px;
     border-radius: 5px;
-    
     background-color: ${props => props.green ? "#96CEB4" : props.yellow ? "#FFE162" : props.purple ? "#C3ACD0" :  props.pink ? "#F7C8E0" :"transparent"};
+    && p{
+        border-bottom:30px;
+    }
+    @media (max-width: 575.98px) {
+        font-size:1.1rem;
+        
+        padding-left: 10px;
+        
+    }
 `
 
 

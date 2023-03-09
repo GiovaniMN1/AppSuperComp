@@ -14,8 +14,8 @@ const BoxStar=()=>{
             method: 'GET',
             url: 'https://superhero-search.p.rapidapi.com/api/?hero=Spiderman',
             headers: {
-             'X-RapidAPI-Key': '80733d58admsh2d071201d7305aap13f084jsn51d9e7e388cf',
-              'X-RapidAPI-Host': 'superhero-search.p.rapidapi.com'
+                'X-RapidAPI-Key': '0ee361c95amsh236653a7a8191f2p13fd33jsn304d9428f829',
+                'X-RapidAPI-Host': 'superhero-search.p.rapidapi.com'
             }
         };
         
@@ -28,9 +28,9 @@ const BoxStar=()=>{
             .catch(err => console.error(err));
   }, []);
     return(
-        <BoxStarCon imgUrl={imgUrl}>
+        <BoxStarCon>
             <BoxCard>
-                <img src={res.images.lg } alt={res.name}/>
+            {res.images && res.images.lg && <img src={res.images.lg} alt={res.name} />}
             </BoxCard>
             <BoxStarConDescription>
                 <BoxStarConDescriptionTitle>
@@ -39,17 +39,16 @@ const BoxStar=()=>{
                 <BoxStarConDescriptionFeatured>
                     <BoxStarConDescriptionFeaturedItems >
                         <p><FontAwesomeIcon icon={faUsers}/></p> 
-                        <p>{res.biography.alignment}</p>
-                        </BoxStarConDescriptionFeaturedItems>
+                        <p>{res?.biography?.alignment}</p>
+                    </BoxStarConDescriptionFeaturedItems>
                     <BoxStarConDescriptionFeaturedItems>
                         <p><FontAwesomeIcon icon={faBolt}/></p> 
-                        <p>{res.powerstats.combat}</p>
+                        <p>{res?.powerstats?.combat}</p>
                     </BoxStarConDescriptionFeaturedItems>
                     <BoxStarConDescriptionFeaturedItems>
                         <p><FontAwesomeIcon icon={faPersonRunning}/></p> 
-                        <p>{res.powerstats.speed}</p>
+                        <p>{res?.powerstats?.speed}</p>
                     </BoxStarConDescriptionFeaturedItems>
-                    
                 </BoxStarConDescriptionFeatured>
             </BoxStarConDescription>
         </BoxStarCon>
@@ -60,28 +59,40 @@ const BoxStarCon=styled.div`
     display: flex;
     height: 90vh;
     background-color: #E4E4E1;
- background-image: radial-gradient(at top center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.03) 100%), linear-gradient(to top, rgba(255,255,255,0.1) 0%, rgba(143,152,157,0.60) 100%);
+    background-image: radial-gradient(at top center, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.03) 100%), linear-gradient(to top, rgba(255,255,255,0.1) 0%, rgba(143,152,157,0.60) 100%);
  	background-blend-mode: normal, multiply;
     background-attachment: fixed;
     background-position: center;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
     flex-direction: column;
     color: white; 
+    //@media (max-width: 991.98px) { ... }
+    @media (max-width: 991.98px) {
+        height: 60vh;
+    }
+    @media (max-width: 575.98px) {
+        height: 100vh;
+    }
     
 `
 const BoxCard=styled.div`
     display: flex;
     width:100%;
     height: 70%;
-    
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 40px;
     border-radius: 5px;
     && img{
         border-radius: 5px;
-       
+    }
+    //@media (max-width: 991.98px) { ... }
+    @media (max-width: 991.98px) {
+        height: 60%;
+    }
+    @media (max-width: 575.98px) {
+        height: 65%;
     }
 
 `
@@ -90,8 +101,17 @@ const BoxStarConDescription=styled.div`
     width:60%;
     height: 90px;
     background-color: #393E46;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     border-radius: 10px;
+    @media (max-width: 991.98px) {
+        width:70%;
+    }
+    @media (max-width: 575.98px) {
+        width:95%;
+        flex-direction:column;
+        height: 110px;
+        margin-bottom: 10px;
+    }
 `
 const BoxStarConDescriptionTitle=styled.div`
     flex: 1 1 35%;
@@ -101,12 +121,27 @@ const BoxStarConDescriptionTitle=styled.div`
     font-size:1.2rem;
     font-weight: 400;
     letter-spacing: 2px;
+    @media (max-width: 991.98px) {
+        font-size:1.6rem;
+    }
+    @media (max-width: 575.98px) {
+        flex: 1 1 100%;
+        
+        font-size:1.4rem;
+    }
 `
 const BoxStarConDescriptionFeatured=styled.div`
     flex: 1 1 65%;
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 991.98px) {
+        font-size:1.1rem;
+    }
+    @media (max-width: 575.98px) {
+        flex: 1 1 100%;
+        font-size:.9rem;
+    }
 `
 const BoxStarConDescriptionFeaturedItems=styled.div`
     flex: 1 1 33%;
